@@ -40,6 +40,12 @@ function App() {
           color="#27C278"
         />
       </main>
+
+      <footer style={{ marginTop: '40px', paddingBottom: '20px', textAlign: 'center' }}>
+        <p style={{ fontSize: '12px', color: '#8B95A1' }}>
+          Made by Heekeun Lee and AI
+        </p>
+      </footer>
     </div>
   )
 }
