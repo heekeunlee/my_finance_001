@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './App.css'
 import Dashboard from './components/Dashboard'
 import AssetCategory from './components/AssetCategory'
-import RunningMan from './components/RunningMan'
 import { assetData } from './data/assetData'
 
 function App() {
@@ -14,14 +13,11 @@ function App() {
     <div className="container p-md">
       <header className="flex justify-between items-center" style={{ marginBottom: '24px', marginTop: '12px' }}>
         <div className="flex-col">
-          <div className="flex items-center">
-            <h1 style={{ fontSize: '28px', fontWeight: 800, lineHeight: 1.2 }}>My Finance</h1>
-            <RunningMan />
-          </div>
+          <h1 style={{ fontSize: '28px', fontWeight: 800, lineHeight: 1.2 }}>My Finance</h1>
           <span style={{ fontSize: '13px', color: '#8B95A1', fontWeight: 500 }}>2026.01.21 기준</span>
         </div>
-        <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#E5E8EB', overflow: 'hidden' }}>
-          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Alex" alt="User" width="100%" height="100%" />
+        <div style={{ fontSize: '32px' }}>
+          🐎
         </div>
       </header>
 
