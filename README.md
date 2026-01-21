@@ -1,16 +1,24 @@
-# React + Vite
+# My Finance
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, intuitive finance tracker web application inspired by Toss and Apple design.
+Track your income, expenses, and savings with ease.
 
-Currently, two official plugins are available:
+## Features
+- **Dashboard**: View your total balance and financial breakdown at a glance.
+- **Transaction Tracking**: Add income, fixed/variable expenses, and savings.
+- **Savings Advisor**: Smart suggestions to improve your financial health based on your data.
+- **Responsive Design**: Looks great on both mobile and desktop.
+- **Data Persistence**: Data is saved locally in your browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React
+- Vite
+- Vanilla CSS (Design Tokens)
 
-## React Compiler
+## Deployment
+This project is deployed to GitHub Pages.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Usage
+1. Open the app.
+2. Add your income and expenses.
+3. Check the dashboard for insights.
