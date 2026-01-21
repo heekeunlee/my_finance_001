@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Dashboard from './components/Dashboard'
 import AssetCategory from './components/AssetCategory'
+import RunningMan from './components/RunningMan'
 import { assetData } from './data/assetData'
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <div className="flex-col">
           <div className="flex items-center">
             <h1 style={{ fontSize: '28px', fontWeight: 800, lineHeight: 1.2 }}>My Finance</h1>
-            <span className="running-emoji">🏃</span>
+            <RunningMan />
           </div>
           <span style={{ fontSize: '13px', color: '#8B95A1', fontWeight: 500 }}>2026.01.21 기준</span>
         </div>
