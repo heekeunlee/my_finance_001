@@ -102,3 +102,32 @@
   background-color: var(--color-border);
   margin: var(--spacing-lg) 0;
 }
+
+@keyframes run {
+  0% {
+    transform: translateY(0);
+  }
+
+  25% {
+    transform: translateY(-3px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  75% {
+    transform: translateY(-1px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.running-emoji {
+  display: inline-block;
+  animation: run 1s infinite ease-in-out;
+  margin-left: 8px;
+  font-size: 24px;
+}

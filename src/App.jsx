@@ -13,7 +13,10 @@ function App() {
     <div className="container p-md">
       <header className="flex justify-between items-center" style={{ marginBottom: '24px', marginTop: '12px' }}>
         <div className="flex-col">
-          <h1 style={{ fontSize: '28px', fontWeight: 800, lineHeight: 1.2 }}>My Finance</h1>
+          <div className="flex items-center">
+            <h1 style={{ fontSize: '28px', fontWeight: 800, lineHeight: 1.2 }}>My Finance</h1>
+            <span className="running-emoji">🏃</span>
+          </div>
           <span style={{ fontSize: '13px', color: '#8B95A1', fontWeight: 500 }}>2026.01.21 기준</span>
         </div>
         <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#E5E8EB', overflow: 'hidden' }}>
