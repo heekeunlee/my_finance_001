@@ -1,44 +1,31 @@
 import React from 'react';
 
 const SavingsAdvisor = ({ income, fixed, variable, savings }) => {
-    if (income === 0) {
-        return (
-            <div className="card">
-                <h3 className="section-title">Financial Health</h3>
-                <p className="text-weak">Add your income and expenses to get personalized advice.</p>
-            </div>
-        );
-    }
+    if (income === 0) return null;
 
     const savingsRate = (savings / income) * 100;
-    const fixedRate = (fixed / income) * 100;
-    const variableRate = (variable / income) * 100;
 
     let messages = [];
-    let color = 'var(--color-primary)';
 
-    if (savingsRate >= 20) {
-        messages.push('🌟 Excellent! You are saving more than 20% of your income.');
-        color = 'var(--color-success)';
-    } else if (savingsRate > 10) {
-        messages.push('👍 Good start. Try to increase your savings to 20% by reducing variable costs.');
-        color = '#F5A623'; // Orange
+    // Logic based on user's specific context or general rules
+    if (savingsRate >= 50) {
+        messages.push('🌟 대단해요! 수입의 절반 이상을 저축하고 계시네요.');
+    } else if (savingsRate >= 30) {
+        messages.push('👍 훌륭합니다! 안정적인 저축 습관을 유지하고 계십니다.');
+    } else if (savingsRate >= 10) {
+        messages.push('📈 저축액을 조금 더 늘려보세요. 고정 지출을 줄이는 것이 도움될 수 있습니다.');
     } else {
-        messages.push('⚠️ Your savings rate is low. Consider setting aside money immediately after receiving income.');
-        color = 'var(--color-error)';
+        messages.push('⚠️ 저축 비율이 낮습니다. 불필요한 지출이 없는지 확인해보세요.');
     }
 
-    if (fixedRate > 45) {
-        messages.push('📉 Your fixed expenses (Rent, Bills) take up a large portion (>45%). improving this might be hard, but check for cheaper subscriptions.');
-    }
-
-    if (variableRate > 30 && savingsRate < 20) {
-        messages.push('☕ You are spending quite a bit on variable costs. Limiting dining out could help boost savings.');
+    // Suggestion based on expense analysis
+    if (fixed > variable * 2) {
+        messages.push('💡 고정 지출 비중이 높습니다. 월세, 대출 이자, 보험료 등을 점검해보세요.');
     }
 
     return (
         <div className="card">
-            <h3 className="section-title">Financial Health</h3>
+            <h3 className="section-title">재무 조언</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {messages.map((msg, idx) => (
                     <div key={idx} style={{
@@ -55,9 +42,7 @@ const SavingsAdvisor = ({ income, fixed, variable, savings }) => {
             </div>
 
             <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: 'var(--color-text-sub)' }}>
-                <div>Savings: <span style={{ color: savingsRate >= 20 ? 'var(--color-success)' : 'var(--color-text-main)' }}>{savingsRate.toFixed(0)}%</span></div>
-                <div>Fixed: {fixedRate.toFixed(0)}%</div>
-                <div>Variable: {variableRate.toFixed(0)}%</div>
+                <div>저축률: <span style={{ color: savingsRate >= 30 ? 'var(--color-success)' : 'var(--color-text-main)' }}>{savingsRate.toFixed(0)}%</span></div>
             </div>
         </div>
     );

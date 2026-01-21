@@ -1,33 +1,26 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Dashboard from './components/Dashboard'
-import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
 import SavingsAdvisor from './components/SavingsAdvisor'
+import ExpenseBreakdown from './components/ExpenseBreakdown'
+import { financeData } from './data/financeData'
 
 function App() {
-  const [transactions, setTransactions] = useState(() => {
-    const saved = localStorage.getItem('my_finance_transactions')
-    return saved ? JSON.parse(saved) : []
-  })
+  const [currentMonth, setCurrentMonth] = useState('2026-01');
 
-  useEffect(() => {
-    localStorage.setItem('my_finance_transactions', JSON.stringify(transactions))
-  }, [transactions])
+  const data = financeData[currentMonth] || { income: [], expenses: [], savings: [] };
 
-  const addTransaction = (t) => {
-    setTransactions([t, ...transactions])
-  }
+  const incomeTotal = data.income.reduce((acc, t) => acc + t.amount, 0);
+  const expenseTotal = data.expenses.reduce((acc, t) => acc + t.amount, 0);
+  const savingsTotal = data.savings.reduce((acc, t) => acc + t.amount, 0);
 
-  const deleteTransaction = (id) => {
-    setTransactions(transactions.filter(t => t.id !== id))
-  }
-
-  // Calculate totals
-  const income = transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + Number(t.amount), 0)
-  const fixed = transactions.filter(t => t.type === 'fixed').reduce((acc, t) => acc + Number(t.amount), 0)
-  const variable = transactions.filter(t => t.type === 'variable').reduce((acc, t) => acc + Number(t.amount), 0)
-  const savings = transactions.filter(t => t.type === 'savings').reduce((acc, t) => acc + Number(t.amount), 0)
+  // Combine for list view
+  const allTransactions = [
+    ...data.income.map(t => ({ ...t, type: 'income' })),
+    ...data.savings.map(t => ({ ...t, type: 'savings' })),
+    ...data.expenses.map(t => ({ ...t, type: 'variable' })) // Type for color coding logic
+  ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <div className="container p-md">
@@ -40,25 +33,22 @@ function App() {
 
       <main className="flex-col gap-md">
         <Dashboard
-          income={income}
-          fixedExpenses={fixed}
-          variableExpenses={variable}
-          savings={savings}
+          income={incomeTotal}
+          expenses={expenseTotal}
+          savings={savingsTotal}
         />
+
+        <ExpenseBreakdown expenses={data.expenses} />
 
         <SavingsAdvisor
-          income={income}
-          fixed={fixed}
-          variable={variable}
-          savings={savings}
+          income={incomeTotal}
+          // Estimate fixed vs variable roughly for advice or update logic
+          fixed={data.expenses.filter(e => ['월세', '대출', '보험료', '구독료'].includes(e.category)).reduce((a, b) => a + b.amount, 0)}
+          variable={data.expenses.filter(e => !['월세', '대출', '보험료', '구독료'].includes(e.category)).reduce((a, b) => a + b.amount, 0)}
+          savings={savingsTotal}
         />
 
-        <div className="card">
-          <h3 className="section-title">New Entry</h3>
-          <TransactionForm onAddTransaction={addTransaction} />
-        </div>
-
-        <TransactionList transactions={transactions} onDelete={deleteTransaction} />
+        <TransactionList transactions={allTransactions} />
       </main>
     </div>
   )
