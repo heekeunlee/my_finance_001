@@ -1,26 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import Dashboard from './components/Dashboard'
-import TransactionList from './components/TransactionList'
-import SavingsAdvisor from './components/SavingsAdvisor'
-import ExpenseBreakdown from './components/ExpenseBreakdown'
-import { financeData } from './data/financeData'
+import AssetCategory from './components/AssetCategory'
+import { assetData } from './data/assetData'
 
 function App() {
-  const [currentMonth, setCurrentMonth] = useState('2026-01');
-
-  const data = financeData[currentMonth] || { income: [], expenses: [], savings: [] };
-
-  const incomeTotal = data.income.reduce((acc, t) => acc + t.amount, 0);
-  const expenseTotal = data.expenses.reduce((acc, t) => acc + t.amount, 0);
-  const savingsTotal = data.savings.reduce((acc, t) => acc + t.amount, 0);
-
-  // Combine for list view
-  const allTransactions = [
-    ...data.income.map(t => ({ ...t, type: 'income' })),
-    ...data.savings.map(t => ({ ...t, type: 'savings' })),
-    ...data.expenses.map(t => ({ ...t, type: 'variable' })) // Type for color coding logic
-  ].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const savingsTotal = assetData.savings.reduce((acc, item) => acc + item.amount, 0);
+  const investmentsTotal = assetData.investments.reduce((acc, item) => acc + item.amount, 0);
+  const totalAssets = savingsTotal + investmentsTotal;
 
   return (
     <div className="container p-md">
@@ -33,22 +20,22 @@ function App() {
 
       <main className="flex-col gap-md">
         <Dashboard
-          income={incomeTotal}
-          expenses={expenseTotal}
-          savings={savingsTotal}
+          totalAssets={totalAssets}
+          savingsTotal={savingsTotal}
+          investmentsTotal={investmentsTotal}
         />
 
-        <ExpenseBreakdown expenses={data.expenses} />
-
-        <SavingsAdvisor
-          income={incomeTotal}
-          // Estimate fixed vs variable roughly for advice or update logic
-          fixed={data.expenses.filter(e => ['월세', '대출', '보험료', '구독료'].includes(e.category)).reduce((a, b) => a + b.amount, 0)}
-          variable={data.expenses.filter(e => !['월세', '대출', '보험료', '구독료'].includes(e.category)).reduce((a, b) => a + b.amount, 0)}
-          savings={savingsTotal}
+        <AssetCategory
+          title="저축 (Savings)"
+          items={assetData.savings}
+          color="#3182F6"
         />
 
-        <TransactionList transactions={allTransactions} />
+        <AssetCategory
+          title="투자 (Investments)"
+          items={assetData.investments}
+          color="#27C278"
+        />
       </main>
     </div>
   )
