@@ -1,0 +1,82 @@
+:root {
+  /* Colors - Toss/Apple Style */
+  --color-primary: #3182F6;
+  --color-primary-dark: #1B64DA;
+  --color-background: #F2F4F6;
+  --color-surface: #FFFFFF;
+  --color-text-main: #191F28;
+  --color-text-sub: #4E5968;
+  --color-text-weak: #8B95A1;
+  --color-border: #E5E8EB;
+  --color-error: #F04452;
+  --color-success: #27C278; /* A nice green */
+  
+  /* Layout */
+  --max-width: 600px; /* Mobile-first width focus */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* Transition */
+  --transition-fast: 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Roboto", "Noto Sans KR", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+input, select {
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  /* On desktop, show a subtle shadow/centering if we wanted, but for mobile vibes, full width often looks fine. 
+     Let's add a max-width wrapper logic for desktop viewing comfort. */
+}
+
+@media (min-width: 601px) {
+  .container {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+  body {
+    background-color: #E8EBED; /* Slightly darker outer background for desktop */
+  }
+}
